@@ -300,8 +300,8 @@ Parameters:
     Default: 'true'
     Description: "Specify whether a hard limit exists for the license count."
     AllowedValues:
-      - true
-      - false
+      - 'true'
+      - 'false'
     Type: String
   PlatformName:
     Default: windows-server-datacenter
@@ -330,22 +330,22 @@ Parameters:
     Default: 'true'
     Description: "Specify whether to automatically allocate the host."
     AllowedValues:
-      - true
-      - false
+      - 'true'
+      - 'false'
     Type: String
   AutoRecoverHost:
     Default: 'true'
     Description: "Specify whether to automatically recover the host."
     AllowedValues:
-      - true
-      - false
+      - 'true'
+      - 'false'
     Type: String
   AutoReleaseHost:
     Default: 'true'
     Description: "Specify whether to automatically release the host."
     AllowedValues:
-      - true
-      - false
+      - 'true'
+      - 'false'
     Type: String
 Rules:
   ValidC5InstanceType:

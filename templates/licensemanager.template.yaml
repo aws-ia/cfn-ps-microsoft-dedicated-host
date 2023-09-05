@@ -39,8 +39,8 @@ Parameters:
     Default: 'true'
     Description: "Please specify accordingly to limit"
     AllowedValues:
-      - true
-      - false
+      - 'true'
+      - 'false'
     Type: String
   PlatformName:
     Default: windows-server-datacenter
@@ -73,27 +73,36 @@ Parameters:
     Default: 'true'
     Description: "Please specify accordingly to limit"
     AllowedValues:
-      - true
-      - false
+      - 'true'
+      - 'false'
     Type: String
   AutoRecoverHost:
     Default: 'true'
     Description: "Please specify accordingly to limit"
     AllowedValues:
-      - true
-      - false
+      - 'true'
+      - 'false'
     Type: String
   AutoReleaseHost:
     Default: 'true'
     Description: "Please specify accordingly to limit"
     AllowedValues:
-      - true
-      - false
+      - 'true'
+      - 'false'
     Type: String
 Resources:
   DHCloudWatchLogGroup:
     Type: AWS::Logs::LogGroup
   CreateDHFunctionExecuteRole:
+    Metadata:
+      cfn-lint:
+        config:
+          ignore_checks:
+            - EIAMPolicyActionWildcard
+            - EIAMPolicyWildcardResource
+          ignore_reasons:
+            - EIAMPolicyActionWildcard: Intent assumed for initial migration.
+            - EIAMPolicyWildcardResource: Intent assumed for initial migration.
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
@@ -116,7 +125,7 @@ Resources:
                   - logs:CreateLogGroup
                   - logs:CreateLogStream
                   - logs:PutLogEvents
-                Resource: arn:aws:logs:*:*:*
+                Resource: !Sub arn:${AWS::Partition}:logs:*:*:*
               - Effect: Allow
                 Action:
                   - license-manager:*
@@ -133,7 +142,7 @@ Resources:
     Properties:
       Description: Create a DH instance and return the ARN.
       Handler: index.lambda_handler
-      Runtime: python3.6
+      Runtime: python3.9
       Timeout: '300'
       Role: !GetAtt 'CreateDHFunctionExecuteRole.Arn'
       Code:

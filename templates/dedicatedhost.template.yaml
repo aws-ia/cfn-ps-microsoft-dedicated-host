@@ -231,3 +231,8 @@ Resources:
           FromPort: -1
           ToPort: -1
           CidrIp: !Ref 'VPCCIDR'
+Outputs:
+  QSS3KeyPrefix:
+    Value: !Ref QSS3KeyPrefix
+  QSS3BucketRegion:
+    Value: !Ref QSS3BucketRegion
